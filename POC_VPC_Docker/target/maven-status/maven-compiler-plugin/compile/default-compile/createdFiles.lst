@@ -1,0 +1,6 @@
+POC/Main.class
+POC/GetS3ObjectLog.class
+POC/LmLogsQueue.class
+POC/GetS3Object.class
+POC/PostLogs.class
+POC/CreatingEvents.class

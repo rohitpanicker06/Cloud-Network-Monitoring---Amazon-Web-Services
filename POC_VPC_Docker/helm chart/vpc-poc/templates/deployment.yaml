@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: vpc-poc
+  labels:
+    chart: vpc-poc
+    app: vpc-poc
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: vpc-poc
+  template:
+    metadata:
+      labels:
+        app: vpc-poc
+    spec:
+      containers:
+        - name: vpcpoc-helm
+          image: {{ .Values.image.repository }}
+          env:
+          - name: AWS_ACCESS_KEY_ID
+            value: "{{.Values.awsCred.AWS_ACCESS_KEY_ID}}"
+          - name: AWS_SECRET_ACCESS_KEY
+            value: "{{.Values.awsCred.AWS_SECRET_ACCESS_KEY}}"
+          - name: bucketName
+            value: "{{.Values.S3.bucketName}}"
+          - name: directory
+            value: "{{.Values.S3.directory}}"
+          - name: LM_ACCESS_ID
+            value: "{{.Values.lmCred.LM_ACCESS_KEY_ID}}"
+          - name: LM_ACCESS_KEY
+            value: "{{.Values.lmCred.LM_SECRET_ACCESS_KEY}}"
+          - name: VPC_CIDR
+            value: "{{.Values.VPC.CIDR}}"
+
+
+
+        
